@@ -1,0 +1,154 @@
+{
+  "instances": [
+    {
+      "name": "node1",
+      "flavor": "q1.small.189.1",
+      "image": "26c07bdf-e39e-46c3-a267-ed88c205acdb",
+      "security_groups": [
+        "ethereum"
+      ],
+      "adminpass": "P@ssw0rd",
+      "post_script": "init_geth.sh",
+      "networks": [
+        "InternetAccess",
+        "private107"
+      ],
+      "key_name": "parinya_ng61vm"
+    },
+    {
+      "name": "node2",
+      "flavor": "q1.small.67.9",
+      "image": "26c07bdf-e39e-46c3-a267-ed88c205acdb",
+      "security_groups": [
+        "ethereum"
+      ],
+      "adminpass": "P@ssw0rd",
+      "post_script": "init_geth.sh",
+      "networks": [
+        "InternetAccess",
+        "private107"
+      ],
+      "key_name": "parinya_ng61vm"
+    },
+    {
+      "name": "node3",
+      "flavor": "q1.small.31.2",
+      "image": "26c07bdf-e39e-46c3-a267-ed88c205acdb",
+      "security_groups": [
+        "ethereum"
+      ],
+      "adminpass": "P@ssw0rd",
+      "post_script": "init_geth.sh",
+      "networks": [
+        "InternetAccess",
+        "private107"
+      ],
+      "key_name": "parinya_ng61vm"
+    },
+    {
+      "name": "node4",
+      "flavor": "q1.small.23.4",
+      "image": "26c07bdf-e39e-46c3-a267-ed88c205acdb",
+      "security_groups": [
+        "ethereum"
+      ],
+      "adminpass": "P@ssw0rd",
+      "post_script": "init_geth.sh",
+      "networks": [
+        "InternetAccess",
+        "private107"
+      ],
+      "key_name": "parinya_ng61vm"
+    },
+    {
+      "name": "node5",
+      "flavor": "q1.small.166.3",
+      "image": "26c07bdf-e39e-46c3-a267-ed88c205acdb",
+      "security_groups": [
+        "ethereum"
+      ],
+      "adminpass": "P@ssw0rd",
+      "post_script": "init_geth.sh",
+      "networks": [
+        "InternetAccess",
+        "private108"
+      ],
+      "key_name": "parinya_ng61vm"
+    },
+    {
+      "name": "node6",
+      "flavor": "q1.small.68.1",
+      "image": "26c07bdf-e39e-46c3-a267-ed88c205acdb",
+      "security_groups": [
+        "ethereum"
+      ],
+      "adminpass": "P@ssw0rd",
+      "post_script": "init_geth.sh",
+      "networks": [
+        "InternetAccess",
+        "private108"
+      ],
+      "key_name": "parinya_ng61vm"
+    },
+    {
+      "name": "node7",
+      "flavor": "q1.small.63.8",
+      "image": "26c07bdf-e39e-46c3-a267-ed88c205acdb",
+      "security_groups": [
+        "ethereum"
+      ],
+      "adminpass": "P@ssw0rd",
+      "post_script": "init_geth.sh",
+      "networks": [
+        "InternetAccess",
+        "private108"
+      ],
+      "key_name": "parinya_ng61vm"
+    },
+    {
+      "name": "node8",
+      "flavor": "q1.small.12.8",
+      "image": "26c07bdf-e39e-46c3-a267-ed88c205acdb",
+      "security_groups": [
+        "ethereum"
+      ],
+      "adminpass": "P@ssw0rd",
+      "post_script": "init_geth.sh",
+      "networks": [
+        "InternetAccess",
+        "private108"
+      ],
+      "key_name": "parinya_ng61vm"
+    },
+    {
+      "name": "node9",
+      "flavor": "q1.small.6.2",
+      "image": "26c07bdf-e39e-46c3-a267-ed88c205acdb",
+      "security_groups": [
+        "ethereum"
+      ],
+      "adminpass": "P@ssw0rd",
+      "post_script": "init_geth.sh",
+      "networks": [
+        "InternetAccess",
+        "private108"
+      ],
+      "key_name": "parinya_ng61vm"
+    },
+    {
+      "name": "attacker",
+      "flavor": "q1.small.43.7",
+      "image": "26c07bdf-e39e-46c3-a267-ed88c205acdb",
+      "security_groups": [
+        "ethereum"
+      ],
+      "adminpass": "P@ssw0rd",
+      "post_script": "init_geth.sh",
+      "networks": [
+        "InternetAccess",
+        "private101"
+      ],
+      "key_name": "parinya_ng61vm"
+    }
+  ]
+}

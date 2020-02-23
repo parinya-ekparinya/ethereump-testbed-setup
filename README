@@ -1,0 +1,100 @@
+#Author: Parinya (pekp6601@uni.sydney.edu.au)
+
+###################################
+# HOW TO USE THESE MESSY SCRIPTS! #
+###################################
+You probably need to update and use the scripts in following orders:
+1)  update env.py
+2)  update vm.json
+3)  update init_geth.sh
+4)  run create_vm.py and wait for a few minutes
+5)  run generate_ip_file.py then you should get ip.csv
+6)  if you did not get all IP of your VMs yet, please go back to 5) again
+7)  (optional) run configure_hosts_file.sh
+8)  depending on post-script and allocation resources, you may need wait for 
+    a while for DAG files generation (15-20 minutes should be sufficient)
+9)  run config_geth.sh
+10)  run start_stat_collector.sh
+
+After all the steps above, you should see blockchain information flowing into 
+your elasticsearch index!
+
+=============================
+======= Configuration =======
+=============================
+
+* env.py
+This file contains settings shared by many python and shell scripts, including 
+OpenStack-relevant environment variables. In order to interact with OpenStack 
+You need to update variables to match your credential and projects. If you do 
+not know what these values are, please consult your OpenStack administrator.
+
+* vm.json
+This is the main configuration file for your virtual machines. Most of values 
+shall be obvious for the ordinary OpenStack users, except "post_script". The 
+post_script value should point to a shell script that you want your VMs to run
+when they finish OS initialization. Again, if you have no clue about these 
+values, please consult your OpenStack administrator.
+
+* init_geth.sh
+Initially, this is a post_script to prepare your VMs for go ethereum. It does
+the followings:
+- install necessary packages
+- enable DHCP on all network interfaces 
+- config rsh for ease of access
+- initialize geth and generate DAG file (please customize genesis block here!!)
+- start geth (please customize geth start options in this script)
+
+=============================
+===== VMs create/delete =====
+=============================
+
+* create_vm.py
+* delete_vm.py
+As their name imply, these are scripts to create and delete VMs. They require 
+appropriate variables in env.py to interact with OpenStack controller nodes.
+They also read information from vm.json in order to create or delete them.
+
+=============================
+=== Post-creation scripts ===
+=============================
+
+* generate_ip_file.py
+The script talk to OpenStack controller nodes and fetch all VM IP addresses.
+It will generate an output file, namely ip.csv. Technically, output file name
+shall be changable by updating env.py. However, the author is too lazy to try
+it.
+
+* ip.csv
+In essense, the only output file from generate_ip_file.py. It contains network
+information of your VMs in the following csv format:
+
+<Instance name>,<network name>,<IP address>
+
+* config_hosts_file.sh
+A script to include VM IP addresses in /etc/hosts file. Before using it please
+copy an original version of your /etc/hosts to /etc/hosts.orig. You may not  
+need this script. Its purpose is for the sake of convenience.
+
+* config_geth.sh
+This script read ip.csv and contact all the go ethereum instances. It does:
+- peering all of geth together
+- create a new account on each of them for the mining purpose
+- start all the miners
+Note that the script will peer geth on the specified network in env.py. Each VM
+must have at least two networks; one for management and another for blockchain.
+
+* start_stat_collector.sh
+The script starts one stat_collector for each geth instance. All the information
+will be put into a local elasticsearch. You may configure an index name and also
+the polling interval in env.py. Note that this script DOES NOT install software 
+for you. You MUST install and configure elasticsearch yourself. If you do not
+know how to do it, you may contact the author of this README file. He could help
+if he is in a good mood.
+
+======== Other files ========
+* common.py
+* bin/
+* es/
+No need to touch these files unless you know what you are doing.
+

@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "blockHash": {"type": "keyword"},
+    "blockNumber": {"type": "long"},
+    "hashrate": {"type": "long"},
+    "serverAddress": {"type": "ip"},
+    "timestamp": {
+      "type": "date",
+      "format": "epoch_second"
+    }
+  }
+}
+

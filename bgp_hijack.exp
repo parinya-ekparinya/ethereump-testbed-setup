@@ -1,0 +1,39 @@
+#!/usr/bin/expect
+
+set action [lindex $argv 0];
+set hostname "bgpd"
+set password "zebra"
+set as_number "4200000101"
+set networks {}
+lappend networks "172.16.107.0\/24"
+lappend networks "172.16.108.0\/24"
+
+set user_prompt "$hostname\> "
+set priv_prompt "$hostname\# "
+set conf_prompt "$hostname\(config\)\# "
+set conf_router_prompt "$hostname\(config-router\)\# "
+
+# connet via telnet
+spawn telnet 172.16.100.32 2605
+expect "assword: " {send "$password\r"}
+# user EXEC mode
+expect $user_prompt {send "enable\r"}
+expect "assword: " {send "$password\r"}
+# privileged EXEC mode
+expect $priv_prompt {send "config term\r"}
+# configuration mode
+expect $conf_prompt {send "router bgp $as_number\r"}
+# config router mode
+foreach net $networks {
+  set command "network"
+  if { $action == "no" } {
+    set command "no $command"
+  }
+  expect $conf_router_prompt {send "$command $net\r"}
+}
+# exit config mode
+expect $conf_router_prompt {send "end\r"}
+# exit telent
+expect $priv_prompt {send "exit\r"}
+expect eof
+

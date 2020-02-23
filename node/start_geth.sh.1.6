@@ -1,0 +1,12 @@
+#!/bin/sh
+
+SERVER_IP=$(ip addr show dev ens3 | grep -e 'inet\s' | awk '{print $2}' | cut -d'/' -f1)
+NETWORKID=303
+
+nohup geth --networkid $NETWORKID --rpc --rpcaddr $SERVER_IP \
+    --rpcapi eth,shh,web3,admin,debug,miner,personal,txpool \
+    --nodiscover \
+    1>/root/geth.out 2>&1 &
+
+sleep 1s
+
